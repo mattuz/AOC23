@@ -23,9 +23,9 @@ for card in cards[::-1]:
 
 
 def cardSort(card):
-    print(card)
-    return value[card]
-print(value["2"])
+    #print(card)
+    return [value.get(char, 0) for char in card]
+#print(value["2"])
 
 types = {"five": [], "four": [], "house": [], 
          "three": [], "two-pair": [], 
@@ -40,7 +40,6 @@ def hand_strength():
         else:
             for c in hand:
                 if hand.count(c) == 4:
-                    #print(hand)
                     types["four"].append(hand)
                     break
             for c in hand:
@@ -72,31 +71,23 @@ def hand_strength():
 def rank():
     score = 1
     rank = {}
-    lowest = None
+    tot = 0
     for type in reversed(types):
-        types[type].sort(key=lambda x: ("A">"K">"Q">"J">"T",x))
-        
-        for hand in types[type]:
-            #if type == "high":
-            rank[hand] = score
-            #elif type == "pair":
-            #    pass
-            #elif type == "two-pair":
-            #    pass
-            #elif type == "three":
-            #    pass
-            #elif type == "house":
-            #    pass
-            #elif type == "four":
-            #    pass
-            #elif type == "five":
-            #    pass
-            score += 1
-            print(hand, rank[hand])
         #print(type)
+        types[type].sort(key=cardSort)
+        for hand in types[type]:
+            #print(hand)
+            rank[hand] = score
+            score += 1
+            
+        #print(type)
+            tot += rank[hand] * hands[hand]
+            print(hand, rank[hand], hands[hand], tot)
+    print(tot)
 
 if __name__ == "__main__":
     hand_strength()
     rank()
     #print(types)
+    #print(value)
     pass
