@@ -77,20 +77,20 @@ def rank():
         types[type].sort(key=lambda x: ("A">"K">"Q">"J">"T",x))
         
         for hand in types[type]:
-            if type == "high":
-                rank[hand] = score
-            elif type == "pair":
-                pass
-            elif type == "two-pair":
-                pass
-            elif type == "three":
-                pass
-            elif type == "house":
-                pass
-            elif type == "four":
-                pass
-            elif type == "five":
-                pass
+            #if type == "high":
+            rank[hand] = score
+            #elif type == "pair":
+            #    pass
+            #elif type == "two-pair":
+            #    pass
+            #elif type == "three":
+            #    pass
+            #elif type == "house":
+            #    pass
+            #elif type == "four":
+            #    pass
+            #elif type == "five":
+            #    pass
             score += 1
             print(hand, rank[hand])
         #print(type)
