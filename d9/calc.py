@@ -43,6 +43,7 @@ def loop_prev():
     histories = {} 
     tot_sum = 0
     for n, seq in enumerate(sequences):
+        #print(seq)
         history = []
         history_recurse(seq, history)
         histories[n] = history[::-1]
