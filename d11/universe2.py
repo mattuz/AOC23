@@ -14,17 +14,13 @@ with p.open("r") as f:
 def manhattan(pointa, pointb):
     return abs(pointb[0]-pointa[0]) + abs(pointb[1]-pointa[1])
 
-def expand1(input, m):
+def expand(input, m):
     lines = [l.strip() for l in input]
 
     lines = np.array([[c for c in x] for x in lines])
 
     rows_idx = np.array(np.where(np.all(lines == ".", axis = 1))).flatten()
     cols_idx = np.array(np.where(np.all(lines == ".", axis = 0))).flatten()
-    
-    #for i in range(0, r):
-    #lines = np.insert(lines, rows_idx, '.', axis = 0)
-    #lines = np.insert(lines, cols_idx, '.', axis = 1)
 
     #print(len(lines[0]))
     galaxy_idx = np.transpose((lines == "#").nonzero())
@@ -44,7 +40,7 @@ def expand1(input, m):
                 glx.append([r+(row_passed*(m-1)), c+(col_passed*(m-1))])
 
                 #print(galaxy_idx[0])
-    glx = np.array(glx)
+    glx = np.array(glx, dtype='int64')
     #print(glx)
 
 
@@ -52,9 +48,11 @@ def expand1(input, m):
                             [np.array([manhattan(galaxy_idx[i], galaxy_idx[j]) for j in range(i+1, len(galaxy_idx))]) for i in range(len(galaxy_idx)-1)])
     pt2 = reduce(lambda x,y: np.sum(x)+np.sum(y), 
                             [np.array([manhattan(glx[i], glx[j]) for j in range(i+1, len(glx))]) for i in range(len(glx)-1)])
-    print(pt2)
-    #print(total_distance)
-    return total_distance
+    #print(pt2)
+    print(total_distance)
+    return pt2
+    #return total_distance
 
 if __name__ == "__main__":
-    print(expand1(lines, 1000000))
+    one = expand(lines, 1000000)
+    print(one)
